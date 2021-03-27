@@ -1,6 +1,55 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>Crabraveprogrammer</title>
+<style>
+body {
+margin: 0;
+background-color: black;
+color: #00ff1a;
+}
+#top {
+font-size: 30px;
+position: sticky;
+overflow: hidden;
+background-color: gray;
+top: 0;
+}
+#news {
+resize: both;
+width: 60%;
+color: blue;
+overflow: auto;
+height: 90px;
+}
+#button {
+color: blue;
+width: 60%;
+text-align: left;
+}
+.news {
+background-color: gray;
+border: 3px solid yellow;
+}
+</style>
+</head>
 <body>
-Follow crabraveprogrammer on scratch
+<div id="top">&nbsp;<image style="" src="pfp.png" width="30px" height="30px">&nbsp;Crabraveprogrammer - <a href="https://scratch.mit.edu/users/crabraveprogrammer">scratch</a> </div><br>
+<button onclick="togglenews()" class="news" id="button">news</button>
+<div id="news" class="news">
+none yet
+</div><br>
+
+<script>
+document.getElementById("news").style.display = "none";
+function togglenews() {
+var thenews = document.getElementById("news");
+if (thenews.style.display == "none") {
+thenews.style.display = "block";
+} else {
+thenews.style.display = "none";
+} 
+}
+</script>
 </body>
 </html>
