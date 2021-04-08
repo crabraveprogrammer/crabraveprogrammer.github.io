@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  background-color: black;
+  color: #00ff1a;
+}
+#top {
+  font-size: 30px;
+  position: sticky;
+  overflow: hidden;
+  background-color: gray;
+  top: 0;
+}
+#news {
+  resize: both;
+  width: 60%;
+  color: blue;
+  overflow: auto;
+  height: 90px;
+}
+#button {
+  color: blue;
+  width: 60%;
+  text-align: left;
+}
+.news {
+  background-color: gray;
+  border: 3px solid yellow;
+}
