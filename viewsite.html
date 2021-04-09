@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body: {
+margin: 0;
+}
+</style>
+<link id="favicon" rel="shortcut icon" href="" />
+</head>
+<body>
+<div style="font-size: 5; float: left;"><u>My Website</u></div>&nbsp;&nbsp;&nbsp;<a id="scratch-profile" href="" target="_blank">My Scratch Profile</a><br><br>
+<div style="float: left">
+<image id="PFP" width="50" height="50" style="float: left"></image>&nbsp; &nbsp; &nbsp;
+</div>
+<h2 id="user"></h2>
+<br>
+<button onclick="gotoslide(0)">Home Page</button><button onclick="gotoslide(3)">Scratch Projects</button><button onclick="gotoslide(1)">My Statistics</button><button onclick="gotoslide(2)">Additional info</button>
+<br><br>
+<div class="slide">
+<h2>Welcome to my website! I hope you like it!</h2>
+<b>About Me:</b>
+<div id="bio"></div>
+<b>What I am working on:</b>
+<div id="work"></div>
+</div>
+<div class="slide">
+Statistics: &nbsp;&nbsp;&nbsp;&nbsp;<br>
+Follower count: <div id="stats-follow"></div>
+total loves recieved: <div id="stats-loves"></div>
+total favorites recieved: <div id="stats-favorites"></div>
+<br>Note: user statistics are not completely up to date.
+</div>
+<div class="slide">
+User ID #: <div id="userid"></div>
+Joined Scratch on: <div id="joindate"></div>
+
+<br>
+This site was created with <a href="https://scratch.mit.edu/users/crabraveprogrammer"> scratch user crabraveprogrammer's</a> Website Creater. You can find it <a href="https://scratch.mit.edu/projects/513498413">here.</a>
+</div>
+<div class="slide">
+My projects:<br><br>
+</div>
+
+<script>
+/*
+var myRequest = new Request('ap');
+var myHeaders = myRequest.headers;
+*/ 
+gotoslide(0);
+function gotoslide(num) {
+var slides = document.getElementsByClassName("slide");
+for (i=0; i<slides.length; i++) {
+slides[i].style.display = "none";
+}
+slides[num].style.display = "block";
+}
+
+var data = window.location.href.split("=")[1].split(",");
+
+fetch(`https://scratchdb.lefty.one/v3/user/info/`+data[0])
+.catch((err) => {
+  console.log(`Error on getting data: ${err}`) // Just in case
+})
+.then(response => response.json())
+.then((res) => {
+  var id = res.id; // reference the userId
+  id = id.toString();
+  console.log(id); // Shows the User's userid in the console
+  document.getElementById("PFP").src = "https://cdn2.scratch.mit.edu/get_image/user/"+id+"_50x50.png";
+document.getElementById("favicon").href = "https://cdn2.scratch.mit.edu/get_image/user/"+id+"_36x36.png";
+document.getElementById("bio").innerHTML = res.bio;
+document.getElementById("work").innerHTML = res.work;
+document.getElementById("stats-follow").innerHTML = res.statistics.followers;
+document.getElementById("stats-loves").innerHTML = res.statistics.loves;
+document.getElementById("stats-favorites").innerHTML = res.statistics.favorites;
+document.getElementById("userid").innerHTML = res.id;
+document.getElementById("joindate").innerHTML = res.joined;
+})
+
+
+
+document.getElementById("user").innerHTML = data[0];
+document.title = data[0];
+document.getElementById("scratch-profile").href = "https://scratch.mit.edu/users/"+data[0];
+document.body.style.backgroundColor = data[1];
+document.body.style.color = data[2];
+document.getElementById("scratch-profile").style.color = data[2];
+var append = document.getElementsByClassName("slide")[3];
+var image = "";
+var link = "";
+for (i=3; i<data.length; i++) {
+image = "https://cdn2.scratch.mit.edu/get_image/project/"+data[i]+"_282x210.png";
+link = "https://scratch.mit.edu/projects/"+data[i];
+append.innerHTML += "<a target='_blank' href='"+link+"'><img src='"+image+"' width='100' height='100'></a>";
+}
+</script>
+
+</body>
+</html>
